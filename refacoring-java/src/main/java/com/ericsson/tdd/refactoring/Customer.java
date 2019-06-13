@@ -42,6 +42,15 @@ public class Customer
                     if (each.getDaysRented () > 3)
                         thisAmount += (each.getDaysRented () - 3) * 1.5;
                     break;
+                case Movie.BLURAY:
+                    if(each.getDaysRented() <= 5){
+                        thisAmount += 5;
+                    }
+                    else if(each.getDaysRented() > 5 & each.getDaysRented() <= 10)
+                        thisAmount += each.getDaysRented();
+                    else
+                        thisAmount += 10 + (each.getDaysRented() - 10) * 5;
+                    break;
             }
 
             frequentRenterPoints++;
@@ -49,6 +58,11 @@ public class Customer
             if (each.getMovie ().getPriceCode () == Movie.NEW_RELEASE
                     && each.getDaysRented () > 1)
                 frequentRenterPoints++;
+            else if(each.getMovie().getPriceCode() == Movie.BLURAY )
+                if(each.getDaysRented() > 1 && each.getDaysRented() <= 10)
+                    frequentRenterPoints += each.getDaysRented() - 1;
+                else
+                    frequentRenterPoints += 10 - (each.getDaysRented() - 10) - 1;
 
             result += "\t" + each.getMovie ().getTitle () + "\t"
                     + String.valueOf (thisAmount) + "\n";
