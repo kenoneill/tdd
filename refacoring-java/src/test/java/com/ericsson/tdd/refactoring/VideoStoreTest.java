@@ -29,10 +29,12 @@ public class VideoStoreTest extends TestCase
     }
 
     public void testMultipleBluRayStatement () {
-        //Blurays cost 5 for up to 5 days, 10 for more than 5. 2 FRP earned per rental
+        //Blurays cost 5 for up to 5 days, then 1 for every day after that up to 10 days, then it is 5 per day
+        //Each BluRay earns 1 FRP perday, up to 10 days, then it starts counting down by 1 for every day rented
         customer.addRental (new Rental (new Movie ("Quantum of Solace", Movie.BLURAY), 3));
         customer.addRental (new Rental (new Movie ("Casino Royale", Movie.BLURAY), 7));
-        assertEquals ("Rental Record for Fred\n\tQuantum of Solace\t5\n\tCasino Royale\t10\nYou owed 15\nYou earned 4 frequent renter points\n", customer.statement ());
+        customer.addRental (new Rental (new Movie ("Skyfall", Movie.BLURAY), 17));
+        assertEquals ("Rental Record for Fred\n\tQuantum of Solace\t5.0\n\tCasino Royale\t7.0\n\tSkyfall\t45.0\nYou owed 57.0\nYou earned 13 frequent renter points\n", customer.statement ());
     }
 
     public void testMultipleRegularStatement () {
