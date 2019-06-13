@@ -28,6 +28,13 @@ public class VideoStoreTest extends TestCase
         assertEquals ("Rental Record for Fred\n\tThe Tigger Movie\t1.5\nYou owed 1.5\nYou earned 1 frequent renter points\n", customer.statement ());
     }
 
+    public void testMultipleBluRayStatement () {
+        //Blurays cost 5 for up to 5 days, 10 for more than 5. 2 FRP earned per rental
+        customer.addRental (new Rental (new Movie ("Quantum of Solace", Movie.BLURAY), 3));
+        customer.addRental (new Rental (new Movie ("Casino Royale", Movie.BLURAY), 7));
+        assertEquals ("Rental Record for Fred\n\tQuantum of Solace\t5\n\tCasino Royale\t10\nYou owed 15\nYou earned 4 frequent renter points\n", customer.statement ());
+    }
+
     public void testMultipleRegularStatement () {
         customer.addRental (new Rental (new Movie ("Plan 9 from Outer Space", Movie.REGULAR), 1));
         customer.addRental (new Rental (new Movie ("8 1/2", Movie.REGULAR), 2));
