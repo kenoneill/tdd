@@ -1,24 +1,17 @@
 package com.ericsson.tdd.refactoring;
 
-public class Movie {
-    public static final int CHILDRENS = 2;
-    public static final int REGULAR = 0;
-    public static final int NEW_RELEASE = 1;
+abstract class Movie {
+    private final String title;
 
-    private String title;
-    private int priceCode;
-
-    public Movie(String title, int priceCode) {
+    Movie(String title) {
         this.title = title;
-        this.priceCode = priceCode;
     }
 
-    public int getPriceCode() {
-        return priceCode;
-    }
-
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
+    abstract double getRentalAmount(int daysRented);
+
+    abstract int getFrequentRenterPoints();
 }

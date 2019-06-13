@@ -1,19 +1,24 @@
 package com.ericsson.tdd.refactoring;
 
-public class Rental {
-    public Rental(Movie movie, int daysRented) {
+class Rental {
+    private final Movie movie;
+    private final int daysRented;
+
+    Rental(Movie movie, int daysRented) {
         this.movie = movie;
         this.daysRented = daysRented;
     }
 
-    public int getDaysRented() {
-        return daysRented;
-    }
-
-    public Movie getMovie() {
+    Movie getMovie() {
         return movie;
     }
 
-    private Movie movie;
-    private int daysRented;
+    double getRentalAmount(){
+        return movie.getRentalAmount(daysRented);
+    }
+
+    int getFrequentRenterPoints(){
+        return movie.getFrequentRenterPoints();
+    }
+
 }
