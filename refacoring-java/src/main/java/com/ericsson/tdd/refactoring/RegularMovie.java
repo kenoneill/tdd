@@ -13,7 +13,7 @@ class RegularMovie extends Movie {
     }
 
     @Override
-    int getFrequentRenterPoints() {
+    int getFrequentRenterPoints(int daysRented) {
         return 1;
     }
 }

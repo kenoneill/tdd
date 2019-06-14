@@ -13,6 +13,12 @@ public class VideoStoreTest
     private final Movie regularMovie2 = new RegularMovie("8 1/2");
     private final Movie regularMovie3 = new RegularMovie("Eraserhead");
     private final Movie regularMovie1 = new RegularMovie("Plan 9 from Outer Space");
+
+    private final Movie blurayMovie1 = new BlurayMovie("Casino Royale");
+    private final Movie blurayMovie2 = new BlurayMovie("Quantum of Solace");
+    private final Movie blurayMovie3 = new BlurayMovie("Skyfall");
+
+
     private Statement statement;
 
     @Before
@@ -72,6 +78,16 @@ public class VideoStoreTest
         statement.addRental (new Rental (regularMovie3, 3));
 
         assertEquals ("Rental Record for Customer\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", statement.generateStatement());
+    }
+
+    @Test
+    public void testMultipleBluRayStatement () {
+        //Blurays cost 5 for up to 5 days, then 1 for every day after that up to 10 days, then it is 5 per day
+        //Each BluRay earns 1 FRP perday, up to 10 days, then it starts counting down by 1 for every day rented
+        statement.addRental (new Rental (blurayMovie1, 3));
+        statement.addRental (new Rental (blurayMovie2, 7));
+        statement.addRental (new Rental (blurayMovie3, 17));
+        assertEquals ("Rental Record for Customer\n\tCasino Royale\t5.0\n\tQuantum of Solace\t7.0\n\tSkyfall\t45.0\nYou owed 57.0\nYou earned 13 frequent renter points\n", statement.generateStatement ());
     }
 
 }

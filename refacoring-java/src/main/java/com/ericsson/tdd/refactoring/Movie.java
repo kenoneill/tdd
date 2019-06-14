@@ -13,5 +13,5 @@ abstract class Movie {
 
     abstract double getRentalAmount(int daysRented);
 
-    abstract int getFrequentRenterPoints();
+    abstract int getFrequentRenterPoints(int daysRented);
 }
